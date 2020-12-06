@@ -4,11 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace AventoOfCode
+namespace AventoOfCode.Day2
 {
- static class Day2
- {
-     public static void Part1() {
+    static class Day2
+    {
+        public static void Part1()
+        {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Day2/input.txt");
             string[] lines = File.ReadAllLines(path);
             int validPasswords = 0;
@@ -71,7 +72,7 @@ namespace AventoOfCode
                 {
                     validPasswords++;
                 }
-                
+
             }
 
             Console.WriteLine("validHEHE: " + validPasswords);
@@ -79,6 +80,6 @@ namespace AventoOfCode
 
     }
 
-    
+
 
 }
