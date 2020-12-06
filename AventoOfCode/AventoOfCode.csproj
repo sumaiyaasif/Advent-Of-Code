@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Day 1\" />
+    <Folder Include="Day1\" />
+    <Folder Include="Day2\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Day 2\input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Day 1\input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
