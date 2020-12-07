@@ -31,6 +31,37 @@ namespace AventoOfCode.Day4
 
         }
 
+        private static bool ValidHeight(string height)
+        {
+            bool heightCm = height.Substring(height.Length - 2) == "cm";
+            bool heightIn = height.Substring(height.Length - 2) == "in";
+            if (heightCm || heightIn)
+            {
+                int valueOfHeight = Convert.ToInt32(height.Substring(0, (height.Length - 2)));
+                if (heightCm && (valueOfHeight >= 150 && valueOfHeight <= 193) ||
+                    heightIn && (valueOfHeight >= 59 && valueOfHeight <= 76))
+                { return true; }
+            }
+            return false;
+        }
+
+        private static bool ValidHairColor(char[] hairColor)
+        {
+            int points = 0;
+            if (hairColor.Length == 7 && hairColor[0] == '#')
+            {
+                char[] possiblities = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+                for (int i = 1; i < hairColor.Length; i++)
+                {
+                    if (possiblities.Contains(hairColor[i]))
+                    {
+                        points++;
+                    }
+                }
+            }
+            return points == 6 ? true : false;
+
+        }
         public static void Part2()
         {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Day4/input.txt");
@@ -51,38 +82,16 @@ namespace AventoOfCode.Day4
                         {
                             if (Convert.ToInt32(result["eyr"]) >= 2020 && Convert.ToInt32(result["eyr"]) <= 2030)
                             {
-                                string height = result["hgt"].ToString();
-                                bool heightCm = height.Substring(height.Length - 2) == "cm";
-                                bool heightIn = height.Substring(height.Length - 2) == "in";
-                                if (heightCm || heightIn)
+                                if (ValidHeight(result["hgt"].ToString()))
                                 {
-                                    int valueOfHeight = Convert.ToInt32(height.Substring(0, (height.Length - 2)));
-                                    if (heightCm && (valueOfHeight >= 150 && valueOfHeight <= 193) ||
-                                        heightIn && (valueOfHeight >= 59 && valueOfHeight <= 76))
+                                    if (ValidHairColor(result["hcl"].ToString().ToCharArray()))
                                     {
-                                        var hairColor = result["hcl"].ToString().ToCharArray();
-                                        if (hairColor.Length == 7 && hairColor[0] == '#')
+                                        string[] eyeColors = { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
+                                        if (eyeColors.Contains(result["ecl"].ToString()))
                                         {
-                                            char[] possiblities = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-                                            var points = 0;
-                                            for (int i = 1; i < hairColor.Length; i++)
+                                            if (result["pid"].ToString().ToCharArray().Length == 9)
                                             {
-                                                if (possiblities.Contains(hairColor[i]))
-                                                {
-                                                    points++;
-                                                }
-                                            }
-                                            // hair color requiremnet has been met
-                                            if (points == 6)
-                                            {
-                                                string[] eyeColors = { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
-                                                if (eyeColors.Contains(result["ecl"].ToString()))
-                                                {
-                                                    if (result["pid"].ToString().ToCharArray().Length == 9)
-                                                    {
-                                                        validPassports++;
-                                                    }
-                                                }
+                                                validPassports++;
                                             }
                                         }
                                     }
@@ -91,9 +100,8 @@ namespace AventoOfCode.Day4
                         }
                     }
                 }
-
             }
-            Console.WriteLine("valid passport: " + validPassports);
+            Console.WriteLine("valid passports: " + validPassports);
         }
     }
 }
