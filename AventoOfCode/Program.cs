@@ -6,7 +6,7 @@ namespace AventoOfCode
     {
         static void Main(string[] args)
         {
-            Day8.Day8.Part1();
+            Day8.Day8.Part2();
         }
     }
 }
