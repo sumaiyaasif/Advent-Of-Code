@@ -11,8 +11,16 @@
     <Folder Include="Day4\" />
     <Folder Include="Day5\" />
     <Folder Include="Day6\" />
+    <Folder Include="Day7\" />
+    <Folder Include="Day8\" />
   </ItemGroup>
   <ItemGroup>
+  <None Update="Day8\input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  <None Update="Day7\input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   <None Update="Day6\input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
