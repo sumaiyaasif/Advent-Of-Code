@@ -37,10 +37,6 @@ Given the starting numbers 3,2,1, the 2020th number spoken is 438.
 Given the starting numbers 3,1,2, the 2020th number spoken is 1836.
 Given your starting numbers, what will be the 2020th number spoken?
 
-Your puzzle answer was 1111.
-
-The first half of this puzzle is complete! It provides one gold star: *
-
 ## --- Part Two ---
 Impressed, the Elves issue you a challenge: determine the 30000000th number spoken. For example, given the same starting numbers as above:
 
