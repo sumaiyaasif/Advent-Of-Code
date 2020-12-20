@@ -141,10 +141,6 @@ After the full six-cycle boot process completes, 112 cubes are left in the activ
 
 Starting with your given initial configuration, simulate six cycles. How many cubes are left in the active state after the sixth cycle?
 
-Your puzzle answer was 291.
-
-The first half of this puzzle is complete! It provides one gold star: *
-
 ## --- Part Two ---
 For some reason, your simulated results don't match what the experimental energy source engineers expected. Apparently, the pocket dimension actually has four spatial dimensions, not three.
 
