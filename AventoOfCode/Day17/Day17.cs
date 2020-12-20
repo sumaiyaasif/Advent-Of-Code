@@ -20,19 +20,184 @@ namespace AventoOfCode.Day17
             {
                 cube[0].Add(line.ToCharArray().ToList());
             }
-            
-            
+            addPadding(cube);
+            addPadding(cube);
+            addPadding(cube);
+            addPadding(cube);
+            addPadding(cube);
+            addPadding(cube);
+            addPadding(cube);
+            List<List<List<char>>> newCube = JsonConvert.DeserializeObject<List<List<List<char>>>>(JsonConvert.SerializeObject(cube));
 
-            printCube(cube);
-            addPadding(cube);
-            addPadding(cube);
-            addPadding(cube);
-            Console.WriteLine("--------------------");
-            printCube(cube);
+            for (int cycle = 0; cycle < 6; cycle++)
+            {
+                for (int z = 1; z < cube.Count - 1; z++)
+                {
+                    for (int x = 1; x < cube[0].Count - 1; x++)
+                    {
+                        for (int y = 1; y < cube[0][0].Count - 1; y++)
+                        {
+                            // cube[z][x][y]
+                            if (cube[z][x][y] == '#')
+                            {
+                                var numOfActive = checkNeighbors(cube, z, x, y);
+                                if (!(numOfActive == 2 || numOfActive == 3))
+                                {
+                                    newCube[z][x][y] = '.';
+                                }
+                            }
+                            else if (cube[z][x][y] == '.')
+                            {
+                                var numOfActive = checkNeighbors(cube, z, x, y);
+                                if (numOfActive == 3)
+                                {
+                                    newCube[z][x][y] = '#';
+                                }
+                            }
+                        }
+                    }
+                }
+                cube = JsonConvert.DeserializeObject<List<List<List<char>>>>(JsonConvert.SerializeObject(newCube));
+                if (cycle == 5)
+                {
+                    int answer = 0;
+                    // Count active and return
+                    for (int z = 0; z < newCube.Count; z++)
+                    {
+                        for (int x = 0; x < newCube[0].Count; x++)
+                        {
+                            for (int y = 0; y < newCube[0][0].Count; y++)
+                            {
+                                if (newCube[z][x][y] == '#')
+                                {
+                                    answer++;
+                                }
+                            }
+                        }
+                    }
+                    Console.WriteLine("Cubes Active: " + answer);
+                }
+            }
         }
 
-        public static void addPadding(List<List<List<char>>> cube){
-            
+        public static int checkNeighbors(List<List<List<char>>> cube, int z, int x, int y)
+        {
+            int numOfActive = 0;
+            // ones in front
+            if (cube[z + 1][x][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x + 1][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x + 1][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x - 1][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x - 1][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x - 1][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z + 1][x + 1][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+
+            // current one
+            if (cube[z][x + 1][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z][x + 1][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z][x][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z][x - 1][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z][x - 1][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z][x][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z][x - 1][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z][x + 1][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+
+            // behind us
+            if (cube[z - 1][x][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x + 1][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x + 1][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x - 1][y + 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x - 1][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x - 1][y] == '#')
+            {
+                numOfActive++;
+            }
+            if (cube[z - 1][x + 1][y - 1] == '#')
+            {
+                numOfActive++;
+            }
+
+            return numOfActive;
+        }
+        public static void addPadding(List<List<List<char>>> cube)
+        {
+
             List<char> emptyRow = new List<char>();
             for (int i = 0; i < cube[0][0].Count; i++)
             {
